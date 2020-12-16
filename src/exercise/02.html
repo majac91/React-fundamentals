@@ -10,18 +10,28 @@
   <script type="module">
     const rootElement = document.getElementById('root')
 
-    // const elementType = 'div'
-    // const elementProps = {className: 'container', children: 'Hello world!'}
-    // const reactElement = React.createElement(elementType, elementProps)
-    // ReactDOM.render(reactElement, rootElement)
+    //verbose
+    const elementType = 'div'
+    const elementProps = {className: 'container', children: 'Hello world!'}
+    const reactElement = React.createElement(elementType, elementProps)
+    ReactDOM.render(reactElement, rootElement)
 
+    //more concise
+    let container = React.createElement('div', {children: ['Hello World']})
+    ReactDOM.render(container, rootElement)
+
+    //this syntax works too
+    let container = React.createElement('div', {}, 'Hello World')
+    ReactDOM.render(container, rootElement)
+
+    //renders the same but creates two nodes for Hello and World
     let container = React.createElement('div', {children: ['Hello', 'World']})
     ReactDOM.render(container, rootElement)
 
     //nesting
-    // let hello = React.createElement('span', {children: 'Hello'})
-    // let world = React.createElement('span', {children: 'World'})
-    // let div = React.createElement('div', {className: 'container'}, hello, world)
-    // ReactDOM.render(div, rootElement)
+    let hello = React.createElement('span', {children: 'Hello'})
+    let world = React.createElement('span', {children: 'World'})
+    let div = React.createElement('div', {className: 'container'}, hello, world)
+    ReactDOM.render(div, rootElement)
   </script>
 </body>
