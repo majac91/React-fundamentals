@@ -6,19 +6,121 @@
   <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script type="text/babel">
-    // 🐨 Make a function called `message` which returns the JSX we want to share
+    // pass in a children prop...
+    function message({children}) {
+      return <div className="message">{children}</div>
+    }
 
-    // 🐨 use that function in place of the divs below with:
-    // 💰 {message({children: 'Hello World'})} {message({children: 'Goodbye World'})}
     const element = (
       <div className="container">
-        <div className="message">Hello World</div>
-        <div className="message">Goodbye World</div>
+        {message({children: 'Hello World'})}
+        {message({children: 'Goodbye World'})}
       </div>
     )
 
-    // 💯 This is only the first step to making actual React components. The rest is in the extra credit!
+    ReactDOM.render(element, document.getElementById('root'))
+
+    //...or a className
+    function message({className}) {
+      return <div className={className}>Hello World</div>
+    }
+
+    const element = (
+      <div id="container">
+        {message({className: 'first-div'})}
+        {message({className: 'second-div'})}
+      </div>
+    )
+
+    ReactDOM.render(element, document.getElementById('root'))
+
+    // 1. 💯 custom component
+    function Message({children}) {
+      return <div className="message">{children}</div>
+    }
+
+    let element = (
+      <div className="container">
+        <Message>Hello world</Message>
+        <Message>Goodbye world</Message>
+      </div>
+    )
+
+    ReactDOM.render(element, document.getElementById('root'))
+
+    // 2. 💯 validate prop type
+    const PropTypes = {
+      string(props, propName, component) {
+        if (typeof props[propName] !== 'string') {
+          return new Error('this is an error')
+        }
+      },
+    }
+
+    function Message({subject, greeting}) {
+      return (
+        <div className="container">
+          {greeting} {subject}
+        </div>
+      )
+    }
+
+    Message.setTypes = {
+      subject: PropTypes.string,
+      greeting: PropTypes.string,
+    }
+
+    const element = (
+      <div className="div">
+        <Message subject="World" greeting="Hello" />
+        <Message subject="World" greeting="Goodbye" />
+      </div>
+    )
+
+    ReactDOM.render(element, document.getElementById('root'))
+
+    // 3. 💯 using prop-types package to validate
+    function Message({subject, greeting}) {
+      return (
+        <div className="msg">
+          {greeting} {subject}
+        </div>
+      )
+    }
+
+    Message.propTypes = {
+      subject: PropTypes.string.isRequired,
+      greeting: PropTypes.string.isRequired,
+    }
+
+    const element = (
+      <div class="container">
+        <Message subject="World" greeting="Hello" />
+        <Message subject="World" greeting="Goodbye" />
+      </div>
+    )
+
+    ReactDOM.render(element, document.getElementById('root'))
+
+    // 4. 💯using React.Fragment
+    function Message({subject, greeting}) {
+      return (
+        <div className="msg">
+          {greeting}
+          {subject}
+        </div>
+      )
+    }
+
+    const element = (
+      <React.Fragment>
+        <Message subject="World" greeting="Hello, " />
+        <Message subject="World" greeting="Goodbye, " />
+      </React.Fragment>
+    )
+
     ReactDOM.render(element, document.getElementById('root'))
   </script>
 </body>

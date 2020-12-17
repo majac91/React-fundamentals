@@ -28,7 +28,7 @@
     let container = React.createElement('div', {children: ['Hello', 'World']})
     ReactDOM.render(container, rootElement)
 
-    //nesting
+    // 1. 💯 nesting elements
     let hello = React.createElement('span', {children: 'Hello'})
     let world = React.createElement('span', {children: 'World'})
     let div = React.createElement('div', {className: 'container'}, hello, world)

@@ -13,13 +13,14 @@
     const element = <div className="container">Hello World</div>
     ReactDOM.render(element, document.getElementById('root'))
 
-    //extra-1
+    // 1. 💯 interpolate className and children
     const elClass = 'container'
     const children = 'Hello world'
     const element = <div className={elClass}>{children}</div>
     ReactDOM.render(element, document.getElementById('root'))
 
-    //extra-2
+    // 2. 💯 spread props
+
     const children = 'Hello World'
     const className = 'container'
     const props = {children, className}
