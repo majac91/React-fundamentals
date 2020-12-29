@@ -68,6 +68,7 @@ function FocusDemo() {
 }
 
 function shuffle(originalArray) {
+  console.log(originalArray)
   const array = [...originalArray]
   let currentIndex = array.length
   let temporaryValue
