@@ -92,7 +92,7 @@ function UserNameForm() {
         <button disabled={error} type="submit">
           Send
         </button>
-        <div>{error}</div>
+        <div style={{color: 'red'}}>{error}</div>
       </form>
     </>
   )
@@ -115,7 +115,7 @@ function UserNameForm() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    alert(event.target[0].value)
+    alert(inputValue) //since we're setting the input value we can just use it instead of event.target
   }
 
   function handleChange(event) {
